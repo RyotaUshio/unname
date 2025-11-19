@@ -22,7 +22,7 @@ You can also run `git grep "Your Name"` to verify your name is not accidentaly l
 
 ### pyproject.toml anonymization
 
-`authors` and `maintainer` fields will be replaced with an empty list (if they exist).
+`authors` and `maintainers` fields will be replaced with an empty list (if they exist).
 
 ### README.md anonymization
 
@@ -38,7 +38,7 @@ Code for the paper "My Awesome Method."
 
 <!-- begin-unname -->
 - Authors: Alice & Bob
-- arXiv link: arxiv.org/abs/1234.56789
+- arXiv link: https://arxiv.org/abs/1234.56789
 <!-- end-unname -->
 
 ## Install
