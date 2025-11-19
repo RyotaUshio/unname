@@ -6,10 +6,15 @@ readme = "README.md"
 authors = [
     { name = "RyotaUshio", email = "ushio@ms.k.u-tokyo.ac.jp" }
 ]
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.13"
 dependencies = [
     "tomlkit>=0.13.3",
 ]
+
+[project.urls]
+Repository = "https://github.com/RyotaUshio/unname.git"
 
 [project.scripts]
 unname = "unname.cli:main"
