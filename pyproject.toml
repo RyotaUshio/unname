@@ -1,0 +1,19 @@
+[project]
+name = "unname"
+version = "0.1.0"
+description = "A simple CLI for anonymizing Python codebases for blind review."
+readme = "README.md"
+authors = [
+    { name = "RyotaUshio", email = "ushio@ms.k.u-tokyo.ac.jp" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "tomlkit>=0.13.3",
+]
+
+[project.scripts]
+unname = "unname.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.9.9,<0.10.0"]
+build-backend = "uv_build"
