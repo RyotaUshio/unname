@@ -17,7 +17,7 @@ Using [uv](https://docs.astral.sh/uv):
 uvx unname -o <OUTPUT_DIRECTORY>
 ```
 
-This will create a _anonymized copy_ of your project in `<OUTPUT_DIRECTORY>.
+This will create a _anonymized copy_ of your project in `<OUTPUT_DIRECTORY>`.
 
 You can also run `grep -r "Your Name" <OUTPUT_DIRECTORY>` to verify your name is not accidentaly left in the git repository.
 
