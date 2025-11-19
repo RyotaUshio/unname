@@ -5,7 +5,7 @@ A simple CLI for anonymizing Python codebases for blind review.
 It anonymizes `pyproject.toml` and `README.md` in your project (see below for details).
 If your project is a [uv workspace](https://docs.astral.sh/uv/concepts/projects/workspaces), it anonymizes all workspace members.
 
-## Prerequisit
+## Prerequisite
 
 Your project must be a git repository since `unname` internally uses `git ls-files` to filter out `.gitignore`d files.
 
@@ -17,9 +17,9 @@ Using [uv](https://docs.astral.sh/uv):
 uvx unname -o <OUTPUT_DIRECTORY>
 ```
 
-This will create a _anonymized copy_ of your project in `<OUTPUT_DIRECTORY>`.
+This will create an _anonymized copy_ of your project in `<OUTPUT_DIRECTORY>`.
 
-You can also run `grep -r "Your Name" <OUTPUT_DIRECTORY>` to verify your name is not accidentaly left in the git repository.
+You can also run `grep -r "Your Name" <OUTPUT_DIRECTORY>` to verify your name is not accidentally left in the git repository.
 
 ## What it does
 
