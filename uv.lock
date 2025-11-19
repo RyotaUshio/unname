@@ -3,17 +3,6 @@ revision = 3
 requires-python = ">=3.13"
 
 [[package]]
-name = "unname"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "tomlkit" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "tomlkit", specifier = ">=0.13.3" }]
-
-[[package]]
 name = "tomlkit"
 version = "0.13.3"
 source = { registry = "https://pypi.org/simple" }
@@ -21,3 +10,14 @@ sdist = { url = "https://files.pythonhosted.org/packages/cc/18/0bbf3884e9eaa3881
 wheels = [
     { url = "https://files.pythonhosted.org/packages/bd/75/8539d011f6be8e29f339c42e633aae3cb73bffa95dd0f9adec09b9c58e85/tomlkit-0.13.3-py3-none-any.whl", hash = "sha256:c89c649d79ee40629a9fda55f8ace8c6a1b42deb912b2a8fd8d942ddadb606b0", size = 38901, upload-time = "2025-06-05T07:13:43.546Z" },
 ]
+
+[[package]]
+name = "unname"
+version = "0.1.1"
+source = { editable = "." }
+dependencies = [
+    { name = "tomlkit" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tomlkit", specifier = ">=0.13.3" }]
