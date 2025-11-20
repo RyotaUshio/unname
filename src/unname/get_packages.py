@@ -1,4 +1,3 @@
-import glob
 from pathlib import Path
 from typing import cast
 
@@ -28,11 +27,10 @@ def get_packages(outdir: Path) -> list[Path]:
         )
         or []
     )
-    package_globs.insert(0, '.')
-    packages = [
+    packages = [outdir] + [
         outdir / package
         for package_glob in package_globs
-        for package in glob.iglob(package_glob, root_dir=outdir)
+        for package in outdir.glob(package_glob)
     ]
     assert all(package.exists() for package in packages)
     return packages

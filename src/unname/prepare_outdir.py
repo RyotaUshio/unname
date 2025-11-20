@@ -1,8 +1,5 @@
-import glob
-import re
 import shutil
 import subprocess
-from collections.abc import Callable
 from pathlib import Path
 
 
@@ -26,26 +23,22 @@ def get_tracked_files() -> list[str]:
     return tracked_files
 
 
-def create_exclude_checker(exclude_globs: list[str]) -> Callable[[str], bool]:
-    patterns = [
-        re.compile(glob.translate(exclude_glob))
+def get_excluded_paths(exclude_globs: list[str]) -> set[str]:
+    excluded_paths = set(
+        str(path)
         for exclude_glob in exclude_globs
-    ]
-
-    def is_excluded(file: str) -> bool:
-        return any(pattern.match(file) for pattern in patterns)
-
-    return is_excluded
+        for path in Path('.').glob(exclude_glob)
+    )
+    return excluded_paths
 
 
 def copy_tracked_files(outdir: Path, exclude_globs: list[str]):
     tracked_files = get_tracked_files()
-    is_excluded = create_exclude_checker(exclude_globs)
+    excluded_paths = get_excluded_paths(exclude_globs)
 
     for file in tracked_files:
-        if is_excluded(file):
+        if file in excluded_paths:
             continue
-        assert Path(file).is_file()
         outfile = outdir / file
         outfile.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(file, outfile)
