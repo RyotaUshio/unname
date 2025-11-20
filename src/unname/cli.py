@@ -1,9 +1,11 @@
 import argparse
+import sys
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 from .anonymize import anonymize_package
-from .get_packages import get_packages
+from .get_packages import PyprojectTomlNotFoundError, get_packages
+from .logger import logger
 from .prepare_outdir import prepare_outdir
 
 
@@ -42,7 +44,13 @@ def parse_args():
 def main():
     args = parse_args()
     prepare_outdir(args.output, args.exclude)
-    packages = get_packages(args.output)
+
+    try:
+        packages = get_packages(args.output)
+    except PyprojectTomlNotFoundError as e:
+        logger.error(e)
+        return sys.exit(1)
+
     for package in packages:
         anonymize_package(package)
 

@@ -5,9 +5,18 @@ from typing import cast
 import tomlkit
 
 
+class PyprojectTomlNotFoundError(Exception):
+    pass
+
+
 def get_packages(outdir: Path) -> list[Path]:
-    with open(outdir / 'pyproject.toml', 'r') as f:
-        pyproject = tomlkit.load(f)
+    try:
+        with open(outdir / 'pyproject.toml', 'r') as f:
+            pyproject = tomlkit.load(f)
+    except FileNotFoundError:
+        raise PyprojectTomlNotFoundError(
+            'Root pyproject.toml not found'
+        ) from None
 
     package_globs = (
         cast(

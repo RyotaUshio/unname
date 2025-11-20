@@ -3,6 +3,8 @@ from pathlib import Path
 import tomlkit
 import tomlkit.api  # necessary to make type checkers happy
 
+from .logger import logger
+
 
 def anonymize_package(path: Path) -> None:
     anonymize_pyproject_toml(path / 'pyproject.toml')
@@ -10,8 +12,12 @@ def anonymize_package(path: Path) -> None:
 
 
 def anonymize_pyproject_toml(path: Path) -> None:
-    with open(path, 'r') as f:
-        content = f.read()
+    try:
+        with open(path, 'r') as f:
+            content = f.read()
+    except FileNotFoundError:
+        logger.warning(f'pyproject.toml not found at {path}, skipping')
+        return
 
     anonymized_content = anonymize_pyproject_toml_content(content)
 
@@ -42,8 +48,12 @@ class ReadmeParseError(Exception):
 
 
 def anonymize_readme_md(path: Path) -> None:
-    with open(path, 'r') as f:
-        content = f.read()
+    try:
+        with open(path, 'r') as f:
+            content = f.read()
+    except FileNotFoundError:
+        logger.warning(f'README.md not found at {path}, skipping')
+        return
 
     anonymized_content = anonymize_readme_md_content(content)
 
