@@ -13,9 +13,7 @@ def get_packages(outdir: Path) -> list[Path]:
         with open(outdir / 'pyproject.toml', 'r') as f:
             pyproject = tomlkit.load(f)
     except FileNotFoundError:
-        raise PyprojectTomlNotFoundError(
-            'Root pyproject.toml not found'
-        ) from None
+        raise PyprojectTomlNotFoundError('Root pyproject.toml not found')
 
     package_globs = (
         cast(
@@ -28,7 +26,7 @@ def get_packages(outdir: Path) -> list[Path]:
         or []
     )
     packages = [outdir] + [
-        outdir / package
+        package
         for package_glob in package_globs
         for package in outdir.glob(package_glob)
     ]
