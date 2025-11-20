@@ -17,10 +17,17 @@ def get_version(name: str) -> str:
 def parse_args():
     parser = argparse.ArgumentParser(
         prog='unname',
-        description='Anonymize Python codebases for blind review.'
+        description='Anonymize Python codebases for blind review.',
     )
     parser.add_argument(
-        '-o', '--output', type=Path, required=True, help='Output directory'
+        '-o', '--output', type=Path, required=True, help='output directory'
+    )
+    parser.add_argument(
+        '--exclude',
+        type=str,
+        nargs='*',
+        default=['LICEN[CS]E', 'LICEN[CS]E.*'],
+        help='glob patterns to exclude from output (default: %(default)s)',
     )
     parser.add_argument(
         '-v',
@@ -34,7 +41,7 @@ def parse_args():
 
 def main():
     args = parse_args()
-    prepare_outdir(args.output)
+    prepare_outdir(args.output, args.exclude)
     packages = get_packages(args.output)
     for package in packages:
         anonymize_package(package)
