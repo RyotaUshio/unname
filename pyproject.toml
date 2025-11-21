@@ -1,6 +1,6 @@
 [project]
 name = "unname"
-version = "0.3.2"
+version = "0.3.3"
 description = "A simple CLI for anonymizing Python codebases for blind review."
 readme = "README.md"
 authors = [
