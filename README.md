@@ -30,7 +30,7 @@ First of all, `unname` will create a copy of your project in the directory speci
 `unname` only copies git-tracked files so that you don't have to manually filter out irrelevant files such as `.venv` from your code submission.
 
 Furthermore, you can provide a list of file paths or glob patterns to exclude from output by the `--exclude` option.
-By default, license files (`LICEN[CS]E`, `LICEN[CS]E.*`) are excluded.
+By default, license files (`**/LICEN[CS]E`, `**/LICEN[CS]E.*`) are excluded.
 
 ### 2. pyproject.toml anonymization
 

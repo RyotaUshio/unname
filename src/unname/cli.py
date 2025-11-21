@@ -28,7 +28,7 @@ def parse_args():
         '--exclude',
         type=str,
         nargs='*',
-        default=['LICEN[CS]E', 'LICEN[CS]E.*'],
+        default=['**/LICEN[CS]E', '**/LICEN[CS]E.*'],
         help='glob patterns to exclude from output (default: %(default)s)',
     )
     parser.add_argument(
