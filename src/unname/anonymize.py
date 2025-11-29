@@ -69,7 +69,7 @@ def anonymize_readme_md_content(content: str) -> str:
         return line.strip().lower() == '<!-- end-unname -->'
 
     lines = content.splitlines(keepends=True)
-    anonymized_lines = []
+    anonymized_lines: list[str] = []
     count = 0
     for line in lines:
         if is_begin(line):

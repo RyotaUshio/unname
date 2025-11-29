@@ -20,6 +20,9 @@ def get_version(name: str) -> str:
         return 'unknown'
 
 
+DEFAULT_EXCLUDE = ['**/LICEN[CS]E', '**/LICEN[CS]E.*', '**/.gitignore']
+
+
 class Options(BaseModel):
     output: Path
     exclude: list[str]
@@ -34,11 +37,25 @@ class Options(BaseModel):
             '-o', '--output', type=Path, required=True, help='output directory'
         )
         parser.add_argument(
+            '-x',
             '--exclude',
             type=str,
             nargs='*',
-            default=['**/LICEN[CS]E', '**/LICEN[CS]E.*', '**/.gitignore'],
-            help='glob patterns to exclude from output (default: %(default)s)',
+            default=[],
+            help=(
+                'Additional glob patterns to exclude from output. '
+                'By default, %(prog)s excludes the following patterns: '
+                + ', '.join(DEFAULT_EXCLUDE)
+                + '. '
+                'Use this option to add more patterns. '
+                'To override the default patterns, use the -X option instead.'
+            ),
+        )
+        parser.add_argument(
+            '-X',
+            type=str,
+            nargs='*',
+            help='glob patterns to exclude from output, overriding the default patterns',
         )
         parser.add_argument(
             '-v',
@@ -48,7 +65,10 @@ class Options(BaseModel):
         )
         args = parser.parse_args()
 
-        options = Options.model_validate(args, from_attributes=True)
+        options = Options(
+            output=args.output,
+            exclude=args.X or (DEFAULT_EXCLUDE + args.exclude),
+        )
         return options
 
 
