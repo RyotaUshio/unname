@@ -11,6 +11,8 @@ Your project must be a git repository since `unname` internally uses `git ls-fil
 
 ## Usage
 
+### Quickstart
+
 Using [uv](https://docs.astral.sh/uv):
 
 ```sh
@@ -19,7 +21,20 @@ uvx unname -o <OUTPUT_DIRECTORY>
 
 This will create an _anonymized copy_ of your project in `<OUTPUT_DIRECTORY>`.
 
-You can also run `grep -r "Your Name" <OUTPUT_DIRECTORY>` to verify your name is not accidentally left in the git repository.
+You could also run `grep -r "Your Name" <OUTPUT_DIRECTORY>` to verify your name is not accidentally left in the git repository.
+
+### Recommended setup
+
+1. Create `scripts/anonymize` with the following content:
+    ```sh
+    #!/usr/bin/env bash
+    
+    uvx unname -o .unname/code --exclude scripts/anonymize
+    zip .unname/code.zip -r .unname/code
+    ```
+2. Make it executable: `chmod +x scripts/anonymize`
+3. Add `.unname` to your `.gitignore`
+4. Run `./scripts/anonymize` to create an anonymized zip file at `.unname/code.zip`
 
 ## What it does
 
@@ -29,8 +44,10 @@ First of all, `unname` will create a copy of your project in the directory speci
 
 `unname` only copies git-tracked files so that you don't have to manually filter out irrelevant files such as `.venv` from your code submission.
 
-Furthermore, you can provide a list of file paths or glob patterns to exclude from output by the `--exclude` option.
+Furthermore, you can provide a list of file paths or glob patterns to exclude from output.
 By default, `unname` excludes license files (`**/LICEN[CS]E`, `**/LICEN[CS]E.*`) and `**/.gitignore`.
+To add more patterns to exclude, use the `-x` or `--exclude` option.
+To override the default patterns, use the `-X` option.
 
 ### 2. pyproject.toml anonymization
 
